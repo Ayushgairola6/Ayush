@@ -4,8 +4,9 @@ const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API
 // This is a complete, self-contained App component that can be used in any React project.
 // It assumes that Tailwind CSS and Framer Motion are already installed and configured.
 // To install them, run: npm install tailwindcss framer-motion
-
 const App = () => {
+  const today = new Date();
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = [
     "/EurekaLandingPage.png", "/Eureka Dark theme.png", "EurekaTestiMonialsection.png"
@@ -65,36 +66,44 @@ const App = () => {
       title: 'Eureka - AI Research Platform',
       img: "/EurekaLandingPage.png",
       description: 'An AI research assistant enabling users to query context-aware bots trained on verified documents. It features a user reputation system and real-time, multi-user collaboration.',
-      tech: ['React', 'Next.js', 'Tailwind', 'Gemini API', 'RAG', 'Pinecone', 'PostgreSQL'],
-      link: 'https://github.com/ayushgairola6/Eureka-AI',
+      tech: ['React', 'Next.js', 'Tailwind', 'GenAI', 'RAG', 'Pinecone', 'PostgreSQL','langchain','websockets'],
+      github: 'https://github.com/Ayushgairola6/Eureka',
+      link: 'https://eureka-six-eta.vercel.app'
+
     },
     {
       title: 'MendAI - AI Companion',
       img: "/MendAI.png",
       description: 'A full-stack GenAI chatbot with a RAG and memory system, implementing freemium user tiering and prompt-tuned context logic.',
-      tech: ['React Native', 'React.js', 'Node.js', 'PostgreSQL', 'Gemini API', 'Qdrant', 'Neo4j'],
-      link: 'https://github.com/ayushgairola6/MendAI',
+      tech: ['React Native', 'React.js', 'Node.js', 'PostgreSQL', 'GenAI', 'Qdrant', 'Neo4j','websockets'],
+      github: 'https://github.com/Ayushgairola6/MendAI',
+      link: 'https://mendai.netlify.app'
+
     },
     {
       title: 'Surge - Social Platform',
       img: "/Surge.png",
       description: 'A social networking platform for taboo discussions, including an AI post summarizer.',
-      tech: ['React', 'Express.js', 'AI summarizer', 'Tailwind', 'Redis'],
-      link: 'https://github.com/ayushgairola6/Surge',
+      tech: ['Next.js', 'Express.js', 'GenAI', 'Tailwind', 'Redis','websockets',],
+      github: 'https://github.com/Ayushgairola6/Surge',
+      link: 'https://surge-lake.vercel.app'
+
     },
     {
       title: 'Yibee - Social + Music Streaming platform',
       img: "/Yibee.png",
       description: 'A social networking platform only for music lovers to express intense emotions they feel when they listen to a particular song',
-      tech: ['React', 'Express.js', 'Firebase', 'Tailwind', 'Redis'],
-      link: 'https://github.com/ayushgairola6/Yibee',
+      tech: ['React', 'Express.js', 'Firebase', 'Tailwind', 'Redis','mongodb','Auth'],
+      github: 'https://github.com/Ayushgairola6/YIBEE-frontend',
+      link: 'https://yibee-frontend.vercel.app'
     },
     {
       title: 'LuvLense - Dating App',
       img: "/Luvlense.png",
       description: 'The backend for a dating app with JWT authentication, matching logic, and real-time chat via Socket.IO. It uses PostgreSQL to store user actions and manage notifications.',
-      tech: ['Node.js', 'Express.js', 'Socket.IO', 'PostgreSQL'],
-      link: 'https://github.com/ayushgairola6/LuvLense',
+      tech: ['Node.js', 'Express.js', 'websockets', 'SQL','Auth','React','Tailwind'],
+      github: 'https://github.com/Ayushgairola6/DemoRepo',
+      link: "https://luvlense.com"
     },
   ];
   const handleNext = () => {
@@ -145,10 +154,8 @@ const App = () => {
       // Create a context prompt for the Gemini API using the resume data.
       const contextPrompt = `
         You are an AI assistant designed to answer questions about a Me full-stack product developer and UI/UX designer named Ayush Gairola.
-        Use the following information to answer user questions about his skills, projects, and experience.
-        Also mention that i am a good fit for those works that require from concept to product ,as i have expertise in both design and code 
-        They can contact me at Ayushgairola2002@gmail.com or whatsapp me at +918126687562 . 
-        If you are asked about something not mentioned in the resume, state that you do not have that information.
+        Use the following information to answer user questions about his skills, projects, experience share their linnks as well if you have them , keep the response very short not too long , act like you are talking as a personal secretary of mine the response shall not be larger than 3-7 lines , do not use explicit language you can use your own knowledge to praise the skills and why they are good .
+        When user asks about a specific thing only then you need to resply about it else not , like if a user asks what tech does he (ayush/me) uses to build frontend , you can reply with - Ayush uses react and next js like widely used technologies for seamless ans smooth product building.
 
 
         **Skills:**
@@ -202,7 +209,7 @@ const App = () => {
   }, [messages, isChatOpen]);
 
   return (
-    <div className="bg-[#121212] min-h-screen text-gray-100 font-inter antialiased">
+    <div className="bg-[#121212] min-h-screen text-gray-100 font-inter antialiased asimovian-regular">
       {/* Header with Navigation */}
       <motion.header
         initial={{ y: -100 }}
@@ -210,8 +217,8 @@ const App = () => {
         transition={{ type: 'spring', stiffness: 120, damping: 15 }}
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-[#121212]/90 backdrop-blur-md "
       >
-        <div className="text-xl font-bold tracking-wider">Ayush.</div>
-        <nav className="hidden md:flex space-x-6 text-sm font-medium">
+        <div className="text-xl tracking-wider ">Ayush.</div>
+        <nav className="hidden md:flex space-x-6 text-sm font-medium josefin-sans">
           <a href="#hero" className="hover:text-cyan-400 transition-colors">Home</a>
           <a href="#projects" className="hover:text-cyan-400 transition-colors">Projects</a>
           <a href="#contact" className="hover:text-cyan-400 transition-colors">Contact</a>
@@ -235,7 +242,7 @@ const App = () => {
         animate={{ opacity: isMenuOpen ? 100 : 0, y: isMenuOpen ? 0 : 130, rotate: isMenuOpen ? 0 : 40 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.3, ease: "circInOut" }}
-        className={` md:hidden fixed bottom-0 left-0 right-0 bg-gradient-to-br from-gray-900 to-black border-r border-indigo-400 shadow-lg p-4 z-40 rounded-tr-full w-45 flex items-start justify-center flex-col`}
+        className={`josefin-sans md:hidden fixed bottom-0 left-0 right-0 bg-gradient-to-br from-gray-900 to-black border-r border-indigo-400 shadow-lg p-4 z-40 rounded-tr-full w-45 flex items-start justify-center flex-col`}
       >
         <a onClick={() => setIsMenuOpen(false)} href="#hero" className="block py-2 text-center text-gray-300 hover:text-cyan-400">Home</a>
         <a onClick={() => setIsMenuOpen(false)} href="#projects" className="block py-2 text-center text-gray-300 hover:text-cyan-400">Projects</a>
@@ -245,7 +252,7 @@ const App = () => {
 
       <main className="relative container mx-auto px-6 pt-24">
 
-        <div className='flex flex-col md:flex-row items-center justify-between'>
+        <div className='flex flex-col md:flex-row items-center justify-evenly'>
           {/* Hero Section */}
           <section id="hero" className="min-h-[calc(100vh-6rem)] flex flex-col justify-center items-center text-center">
             <motion.div
@@ -254,21 +261,21 @@ const App = () => {
               animate="visible"
               className="flex flex-col items-center"
             >
-              <motion.p variants={textVariants} className="text-lg text-cyan-400 mb-2">
+              <motion.p variants={textVariants} className="text-lg text-cyan-400 mb-2 josefin-sans">
                 Hello, I'm Ayush Gairola
               </motion.p>
-              <motion.h1 variants={textVariants} className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 leading-tight">
+              <motion.h1 variants={textVariants} className="text-6xl md:text-8xl font-extrabold tracking-tight mb-4 leading-tight asimovian-regular">
                 A Product Developer <br />+ Designer
               </motion.h1>
-              <motion.p variants={textVariants} className="max-w-2xl text-xl text-gray-400 mb-8">
+              <motion.p variants={textVariants} className="max-w-2xl text-xl text-gray-400 mb-8 josefin-sans">
                 Building scalable applications with a focus on MVP's, real-time systems and GenAI features like RAG and Context aware AI agents.
               </motion.p>
               <motion.a
                 variants={textVariants}
                 href="#projects"
-                className="bg-cyan-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-cyan-500 transition-all duration-300 transform hover:scale-105"
+                className="bg-cyan-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-cyan-500 transition-discrete duration-300 transform hover:scale-105 josefin-sans"
               >
-                See My Projects
+                See My Projects {"-->"}
               </motion.a>
             </motion.div>
           </section>
@@ -297,26 +304,26 @@ const App = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="cursor-grab bg-gradient-to-br from-black/80 to-white/10 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-indigo-400 transition-all duration-300"
+                className="cursor-grab bg-gradient-to-br from-black/80 to-white/10 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-indigo-400 transition-discrete duration-300"
               >
                 <div>
-                  <img src={project.img} alt={project.img} />
+                  <img className='rounded-lg' src={project.img} alt={project.img} />
                 </div>
-                <h3 className="text-2xl font-semibold text-cyan-400 mb-2">{project.title}</h3>
-                <p className="text-gray-400 mb-4">{project.description}</p>
+                <h3 className="text-2xl font-semibold text-cyan-400 my-4 ">{project.title}</h3>
+                <p className="text-gray-400 mb-4 josefin-sans">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech, i) => (
-                    <span key={i} className="bg-gray-700 text-sm px-3 py-1 rounded-full text-gray-300">
+                    <span key={i} className="bg-emerald-700 flex items-center justify-center text-xs px-3 py-1 rounded-full text-gray-300 josefin-sans">
                       {tech}
                     </span>
                   ))}
                 </div>
                 <div className='flex items-center justify-between flex-wrap gap-2'>
-                  <a href={project.link} className="text-gray-300 hover:text-cyan-400 transition-colors flex items-center group">
+                  <a href={project.github} className="text-gray-300 text-sm hover:text-cyan-400 transition-colors flex items-center group">
                     View Project on GitHub
                     <span className="ml-2 group-hover:translate-x-1 transition-transform duration-200">→</span>
                   </a>
-                  <a href={project.link} className="bg-gray-200 text-black px-2 py-1 rounded-lg">
+                  <a href={project.link} className=" text-emerald-700 group-hover:animate-pulse text-sm px-2 py-1 rounded-lg group hover:text-teal-500 transition-colors duration-150">
                     Live Preview
                     <span className="ml-2 group-hover:translate-x-1 transition-transform duration-200 -rotate-45">→</span>
                   </a>
@@ -372,7 +379,7 @@ const App = () => {
           </button>
         </div>
         {/* Contact Section */}
-        <section id="contact" className="py-20 text-center">
+        <section id="contact" className="py-20 text-center ">
           <motion.h2
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -387,7 +394,7 @@ const App = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl text-gray-400 max-w-2xl mx-auto mb-8"
+            className="text-xl text-gray-400 max-w-2xl mx-auto mb-8 josefin-sans"
           >
             I'm currently available for freelance projects. Feel free to reach out to me!
           </motion.p>
@@ -397,15 +404,15 @@ const App = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
             href="mailto:ayushgairola2002@gmail.com"
-            className="bg-gray-700 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-600 transition-all duration-300"
+            className="bg-emerald-700 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-600 transition-all duration-300 josefin-sans"
           >
-            Get in Touch
+            Get in Touch {"-->"}
           </motion.a>
         </section>
       </main>
 
-      <footer className="bg-[#1e1e1e] text-center p-4 text-gray-500">
-        <p>&copy; {new Date().toISOString().split("T")[0]} Ayush Gairola. All rights reserved.</p>
+      <footer className="bg-[#1e1e1e] text-center p-4 text-gray-500 josefin-sans">
+        <p>&copy; {today.toDateString()} Ayush Gairola. All rights reserved.</p>
       </footer>
 
       {/* Floating Chatbot UI */}
@@ -419,7 +426,7 @@ const App = () => {
             className="fixed bottom-10 right-4 md:right-15 w-[90vw] max-w-md h-[70vh] bg-[#1e1e1e] rounded-xl shadow-2xl flex flex-col z-50 overflow-hidden border border-cyan-400"
           >
             <div className="flex items-center justify-between p-4 bg-[#1a1a1a] border-b border-gray-700">
-              <h3 className="text-lg font-semibold text-white">Ask about Ayush!</h3>
+              <h3 className="text-lg font-semibold text-white ">Ask about Ayush!</h3>
               <button onClick={() => setIsChatOpen(false)} className="text-gray-400 hover:text-white transition-colors">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -433,7 +440,7 @@ const App = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
-                  className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                  className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} josefin-sans`}
                 >
                   <div
                     className={`max-w-[80%] rounded-xl px-4 py-2 ${msg.sender === 'user'
@@ -465,7 +472,7 @@ const App = () => {
                   type="text"
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
-                  className="flex-1 bg-gray-800 text-gray-100 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-600"
+                  className="flex-1 bg-gray-800 text-gray-100 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-600 josefin-sans"
                   placeholder="Ask about Ayush..."
                   disabled={isLoading}
                 />
@@ -485,9 +492,9 @@ const App = () => {
       </AnimatePresence>
 
       {/* Chatbot Toggle Button */}
-      <motion.button 
+      <motion.button
         onClick={() => setIsChatOpen(!isChatOpen)}
-        className="fixed bottom-4 right-4 md:bottom-8 md:right-8 bg-cyan-600 text-white p-2 rounded-full shadow-lg hover:bg-cyan-500 transition-colors duration-200 z-50 cursor-pointer" 
+        className="fixed bottom-4 right-4 md:bottom-8 md:right-8 bg-cyan-600 text-white p-2 rounded-full shadow-lg hover:bg-cyan-500 transition-colors duration-200 z-50 cursor-pointer"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         whileTap={{ scale: 0.9 }}
